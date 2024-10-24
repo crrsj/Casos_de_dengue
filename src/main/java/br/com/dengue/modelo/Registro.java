@@ -2,6 +2,7 @@ package br.com.dengue.modelo;
 
 import java.time.LocalDate;
 
+import br.com.dengue.dto.AtualizarRegistroDTO;
 import br.com.dengue.dto.RegistroDTO;
 import br.com.dengue.enums.Alerta;
 import br.com.dengue.enums.Cidade;
@@ -43,15 +44,33 @@ public class Registro {
 	private Alerta alerta;
 	
 
-	public Registro(RegistroDTO registroDTO) {
-		this.casos = registroDTO.getCasos();
+	public Registro(RegistroDTO registroDTO) {		
 		this.dataHora = registroDTO.getDataHora();
 		this.nomePaciente = registroDTO.getNomePaciente();
 		this.cpf = registroDTO.getCpf();
 		this.dataNasc = registroDTO.getDataNasc();
 		this.cidade = registroDTO.getCidade();
 		this.zona = registroDTO.getZona();
-		this.exame = registroDTO.getExame();		
+		this.exame = registroDTO.getExame();
+		this.casos = registroDTO.getCasos();
 		this.alerta = registroDTO.getAlerta();
+	}
+
+
+
+
+	public void atualize(AtualizarRegistroDTO registroDTO) {
+		if(registroDTO.getNomePaciente()!= null) {
+			this.nomePaciente = registroDTO.getNomePaciente();
+		}
+		if(registroDTO.getDataNasc()!= null) {
+			this.dataNasc = registroDTO.getDataNasc();
+		}
+		if(registroDTO.getZona() != null) {
+			this.zona = registroDTO.getZona();
+		}
+		if(registroDTO.getCasos() != null) {
+			this.casos = registroDTO.getCasos();
+		}
 	}
 }

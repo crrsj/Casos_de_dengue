@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.dengue.dto.AtualizarRegistroDTO;
 import br.com.dengue.dto.BuscarRegistrosDTO;
 import br.com.dengue.dto.RegistroDTO;
 import br.com.dengue.enums.Alerta;
@@ -12,6 +13,7 @@ import br.com.dengue.enums.Cidade;
 import br.com.dengue.enums.Exame;
 import br.com.dengue.modelo.Registro;
 import br.com.dengue.repositorio.RegistroRepositorio;
+import jakarta.transaction.Transactional;
 
 @Service
 public class RegistroServico {
@@ -39,6 +41,14 @@ public class RegistroServico {
 		  return buscar;
 	  }
 	  
-	  
+	  @Transactional
+	  public Registro atualizarRegistro(AtualizarRegistroDTO registroDTO) {
+		  var atualizar = registroRepositorio.getReferenceById(registroDTO.getId());		  
+		  atualizar.atualize(registroDTO);
+		  return registroRepositorio.save(atualizar);
+		  
+		  
+		 
+	  }
 	 
 }
