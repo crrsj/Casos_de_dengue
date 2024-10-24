@@ -38,5 +38,7 @@ public class RegistroServico {
 		  var buscar = registroRepositorio.findAll().stream().map(BuscarRegistrosDTO::new).toList();
 		  return buscar;
 	  }
+	  
+	  
 	 
 }
