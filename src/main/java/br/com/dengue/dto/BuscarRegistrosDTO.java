@@ -31,5 +31,6 @@ public class BuscarRegistrosDTO {
 		this.casos = registro.getCasos();
 		this.alerta = registro.getAlerta();
 	}
+	
 }
 

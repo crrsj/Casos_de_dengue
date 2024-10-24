@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +18,6 @@ import br.com.dengue.dto.AtualizarRegistroDTO;
 import br.com.dengue.dto.BuscarRegistrosDTO;
 import br.com.dengue.dto.RegistroDTO;
 import br.com.dengue.servico.RegistroServico;
-import jakarta.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("registro")
@@ -41,9 +41,21 @@ public class RegistroControle {
 		
 	}
 	
-	@PutMapping("{id}")
+	@PutMapping
 	public ResponseEntity<AtualizarRegistroDTO>atualizarRegistro(@RequestBody AtualizarRegistroDTO atualizar ){
 		var atualize = registroServico.atualizarRegistro(atualizar);
 		return ResponseEntity.ok().body(new AtualizarRegistroDTO(atualize));
+	}
+	
+	@GetMapping("{id}")
+	public ResponseEntity<BuscarRegistrosDTO>buscarPorId(@PathVariable Long id){
+		var busca = registroServico.buscarPorId(id);
+		return ResponseEntity.ok().body(new BuscarRegistrosDTO(busca));
+	}
+	
+	@DeleteMapping("{id}")
+	public ResponseEntity<Void>excluir(@PathVariable Long id){
+		registroServico.excluir(id);
+		return ResponseEntity.noContent().build();
 	}
 }

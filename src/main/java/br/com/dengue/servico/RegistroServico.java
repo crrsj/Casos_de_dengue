@@ -1,8 +1,10 @@
 package br.com.dengue.servico;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.dengue.dto.AtualizarRegistroDTO;
@@ -45,10 +47,18 @@ public class RegistroServico {
 	  public Registro atualizarRegistro(AtualizarRegistroDTO registroDTO) {
 		  var atualizar = registroRepositorio.getReferenceById(registroDTO.getId());		  
 		  atualizar.atualize(registroDTO);
-		  return registroRepositorio.save(atualizar);
-		  
+		  return registroRepositorio.save(atualizar);    
 		  
 		 
 	  }
+	  
+	  
+	  public Registro buscarPorId(Long id){
+		  Optional<Registro> buscaPorId = registroRepositorio.findById(id);
+		  return buscaPorId.orElseThrow();
+	  }
 	 
+	  public void excluir(Long id) {
+		  registroRepositorio.deleteById(id);
+	  }
 }
